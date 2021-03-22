@@ -253,8 +253,8 @@ import math
 from scipy import signal
 import pandas as pd
 #Sample Min:300e3 Max:500e5
-sample_rate = 350e5 # Hz
-b,a =signal.butter(3,.75)
+sample_rate = 250e4 # Hz
+b,a =signal.butter(3,.2)
 final = np.array([])
 flist=np.array([])
 
@@ -296,9 +296,9 @@ def setup(center_freq,sample_rate,final):
 		print("Signal Peaks:",temp)
 		final=np.concatenate((final, temp))
 	##Plotting Frequency Response			#freq1=power(freq)
-	plt.plot(freq)						#plt.plot(freqxfreq)
+	plt.plot(freqx,freq)						#plt.plot(freqxfreq)
 	#plt.xlim((-10,1030))
-	plt.ylim((-10000,55000))
+	#plt.ylim((-10000,55000))
 	plt.xlabel('Frequency(Base Freq+Offset)Hz')
 	plt.ylabel('Amplitude of Signal')
 	plt.title("Frequency Amplitude:"+name) #for Single TimeFrame
@@ -331,16 +331,17 @@ def setup(center_freq,sample_rate,final):
 
 	plt.ylabel('Time [sec]')
 
-	plt.show()
-	# plt.savefig(name+"-WD.png") 	#///
+	#plt.show()
+	plt.savefig(name+"-WD.png") 	#///
 	# plt.show()
-	# plt.close()
+	plt.close()
 	return final
 	
 ##Main Function Codes
 print("Sample rate:",sample_rate,'Hz')
-for center_freq in range(2415,2715,50):
-	center_freq=center_freq*1e6
+rangeF=[2475,2435,]
+for center_freq in range(2405,2515,3):
+	center_freq=int(center_freq*1e6)
 	print("Center_freq:",center_freq,'Hz')
 	final1=setup(center_freq,sample_rate,final)
 	final=final1
