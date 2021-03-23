@@ -50,9 +50,9 @@ def setup(center_freq,sample_rate,final):
 	
 	#Detection of Required Amplitude Peaks
 	sig_avg = signal.find_peaks(filter(b,a,freq),height=10000) 	
-	print('Size:',sig_avg[0].size)								#if(tuple!=empty)->then Adjust OffsetCorrection->then append in final[]
+	print('Size:',sig_avg[0].size)		
 	temp=np.array(sig_avg[0])
-	if(sig_avg[0].size>0):
+	if(sig_avg[0].size>0):					#Add peaks to final[] if they exist
 		print("Active Band:{}".format(name))
 		for i in range(0,temp.size):
 			temp[i]=temp[i]*(sample_rate/1000)+center_freq
